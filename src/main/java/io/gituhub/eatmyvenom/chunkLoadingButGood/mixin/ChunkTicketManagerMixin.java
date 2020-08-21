@@ -26,7 +26,7 @@ public class ChunkTicketManagerMixin {
     }
 
     public int getLevelAtPos(long pos) {
-        return !this.getTicketSet(pos).isEmpty() ? (this.getTicketSet(pos).first()).getLevel() : ThreadedAnvilChunkStorage.MAX_LEVEL + 1;
+        return !this.getTicketSet(pos).isEmpty() ? (this.getTicketSet(pos).first()).getLevel() : ThreadedAnvilChunkStorage.MAX_LEVEL + 10;
     }
 
     public int getLevelAtPos(ChunkPos pos) {
