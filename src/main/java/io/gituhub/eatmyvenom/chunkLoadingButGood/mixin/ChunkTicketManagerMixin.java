@@ -15,7 +15,7 @@ import net.minecraft.util.math.ChunkPos;
 @Mixin(ChunkTicketManager.class)
 public class ChunkTicketManagerMixin {
 
-    private final static ChunkTicketType UNKNOWN_TICKET = ChunkTicketType.field_14032;
+    private final static ChunkTicketType<ChunkPos> UNKNOWN_TICKET = ChunkTicketType.field_14032;
 
     @ModifyVariable(at = @At("HEAD"), method = "addTicketWithLevel", index = 3)
     private <T> int addTicketWithLevel(int level, ChunkTicketType<T> type, ChunkPos pos, int level2, T argument) {
