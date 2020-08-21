@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "${name}",
+  "id": "better-chunk-loading",
   "version": "${version}",
 
   "name": "Better chunk loading",
