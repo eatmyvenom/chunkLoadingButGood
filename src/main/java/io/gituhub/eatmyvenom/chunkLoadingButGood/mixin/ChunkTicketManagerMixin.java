@@ -17,16 +17,16 @@ public class ChunkTicketManagerMixin {
 
     private final static ChunkTicketType<ChunkPos> UNKNOWN_TICKET = ChunkTicketType.field_14032;
 
-    @ModifyVariable(at = @At("HEAD"), method = "addTicketWithLevel", index = 3)
-    private <T> int addTicketWithLevel(ChunkTicketType<T> type, ChunkPos pos, int level, T argument) {
+    @ModifyVariable(at = @At("HEAD"), method = "addTicketWithLevel", index = 3, argsOnly = true)
+    private <T> int addTicketWithLevel(int levelRet, ChunkTicketType<T> type, ChunkPos pos, int level, T argument) {
         if(type.equals(UNKNOWN_TICKET) && shouldUpgrade(pos, level)) {
-            return level-=4;
+            return levelRet-=4;
         }
-        return level;
+        return levelRet;
     }
 
     public int getLevelAtPos(long pos) {
-        return !this.getTicketSet(pos).isEmpty() ? (this.getTicketSet(pos).first()).getLevel() : ThreadedAnvilChunkStorage.MAX_LEVEL + 10;
+        return !this.getTicketSet(pos).isEmpty() ? (this.getTicketSet(pos).first()).getLevel() : ThreadedAnvilChunkStorage.MAX_LEVEL + 100;
     }
 
     public int getLevelAtPos(ChunkPos pos) {
