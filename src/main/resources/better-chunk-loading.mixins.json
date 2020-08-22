@@ -4,7 +4,8 @@
   "package": "io.gituhub.eatmyvenom.chunkLoadingButGood.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "ChunkTicketManagerMixin"
+    "ChunkHolderMixin",
+    "ThreadedAnvilChunkStorageMixin"
   ],
   "injectors": {
     "defaultRequire": 1
