@@ -1,6 +1,5 @@
 package io.gituhub.eatmyvenom.chunkLoadingButGood.mixin;
 
-import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -21,10 +20,10 @@ public class ChunkHolderMixin implements Promotable {
     @Shadow
     ChunkPos pos;
 
-    @Redirect(method = "tick", at = @At(value = "FIELD", target = "Lnet/minecraft/server/world/ChunkHolder;level:I", opcode = Opcodes.GETFIELD))
-    private int upgradeLevel() {
+    @Redirect(method = "tick", at = @At(value = "FIELD", target = "Lnet/minecraft/server/world/ChunkHolder;level:I", opcode = org.objectweb.asm.Opcodes.GETFIELD))
+    private int upgradeLevel(ChunkHolder self) {
         if(this.promotable) {
-            return 33;
+            return 31;
         } else {
             return this.level;
         }

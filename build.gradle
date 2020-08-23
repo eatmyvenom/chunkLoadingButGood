@@ -3,6 +3,10 @@ plugins {
 	id 'maven-publish'
 }
 
+repositories {
+	maven { url = "https://jitpack.io" }
+}
+
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
@@ -14,6 +18,10 @@ dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+	modRuntime ("com.github.SuperCoder7979:databreaker:${project.databreaker_version}") {
+		transitive = false
+	}
 }
 
 processResources {

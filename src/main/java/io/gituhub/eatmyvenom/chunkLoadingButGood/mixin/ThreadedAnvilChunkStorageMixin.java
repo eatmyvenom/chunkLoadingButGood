@@ -9,7 +9,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import io.gituhub.eatmyvenom.chunkLoadingButGood.Promotable;
 import net.minecraft.server.world.ChunkHolder;
 import net.minecraft.server.world.ThreadedAnvilChunkStorage;
-import net.minecraft.server.world.ChunkHolder.LevelType;
 import net.minecraft.util.math.ChunkPos;
 
 @Mixin(ThreadedAnvilChunkStorage.class)
@@ -17,9 +16,11 @@ public class ThreadedAnvilChunkStorageMixin {
 
     @Inject(at = @At("HEAD"), method = "setLevel")
     public void checkPromotions(long chunk, int level, ChunkHolder holder, int previousLevel, CallbackInfoReturnable<ChunkHolder> ci) {
-        if(holder.getLevelType().equals(LevelType.BORDER) && shouldUpgrade(holder.getPos(), level)) {
+
+        if(holder != null && shouldUpgrade(holder.getPos(), level)) {
             ((Promotable)holder).setPromotable(true);
         }
+
     }
 
     
@@ -36,7 +37,7 @@ public class ThreadedAnvilChunkStorageMixin {
     }
 
     public int getLevelAtPos(long pos) {
-        return this.getChunkHolder(pos).getLevel();
+        return this.getChunkHolder(pos) != null ? this.getChunkHolder(pos).getLevel() : Integer.MAX_VALUE;
     }
     
 	@Shadow protected ChunkHolder getChunkHolder(long chunk) {
